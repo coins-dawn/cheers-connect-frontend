@@ -1,3 +1,5 @@
+'use client'
+
 import { stations3 } from "@/data/stations"
 import { isMatch } from "@/util/input"
 import { Box, Button, Flex, HStack, Input, Text, css } from "@kuma-ui/core"
