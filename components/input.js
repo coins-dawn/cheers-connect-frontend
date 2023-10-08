@@ -1,5 +1,3 @@
-'use client'
-
 import { stations3 } from "@/data/stations"
 import { isMatch } from "@/util/input"
 import { Box, Button, Flex, HStack, Input, Text, css } from "@kuma-ui/core"
@@ -114,7 +112,7 @@ export const StationInput = ({ value, setValue }) => {
             onMouseDown={onSelectText}
             data-id={id}
             data-name={name}
-            backgroundColor={name == value ? "bisque" : ""}
+            backgroundColor={name == value ? "bisque" : "inherit"}
           >
             {name}
           </Box>
