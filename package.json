@@ -15,7 +15,8 @@
     "eslint-config-next": "13.4.18",
     "next": "13.4.18",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@kuma-ui/next-plugin": "^1.1.9"
