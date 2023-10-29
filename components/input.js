@@ -7,7 +7,7 @@ export const StationInput = ({ value, setValue }) => {
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
   const [hidden, setHidden] = useState(true)
-  const [text, setText] = useState(value)
+  const [text, setText] = useState(value.name)
 
   const onOpenDialog = (e) => {
     setOpen(true)
@@ -34,7 +34,7 @@ export const StationInput = ({ value, setValue }) => {
 
   // onClickだとonBlurより順序が遅い
   const onSelectText = (e) => {
-    setValue(e.target.dataset.name)
+    setValue(stations3.find(station => station.id == e.target.dataset.id))
     setText(e.target.dataset.name)
     setHidden(true)
     setOpen(false)
@@ -55,7 +55,7 @@ export const StationInput = ({ value, setValue }) => {
       width="300px"
       height="24px"
     >
-      {value}
+      {value.name}
     </Text>
     <Box
       hidden={!open}
@@ -112,7 +112,7 @@ export const StationInput = ({ value, setValue }) => {
             onMouseDown={onSelectText}
             data-id={id}
             data-name={name}
-            backgroundColor={name == value ? "bisque" : "inherit"}
+            backgroundColor={name == value.name ? "bisque" : "inherit"}
           >
             {name}
           </Box>
