@@ -1,13 +1,15 @@
 import { stations3 } from "@/data/stations"
 import { isMatch } from "@/util/input"
-import { Box, Button, Flex, HStack, Input, Text, css } from "@kuma-ui/core"
+import { useSearchRadius, useStation } from "@/util/state"
+import { Box, Button, Flex, Input, Text } from "@kuma-ui/core"
 import { useEffect, useRef, useState } from "react"
 
-export const StationInput = ({ value, setValue }) => {
+export const StationInput = (props) => {
   const ref = useRef(null)
+  const [station, setStation] = useStation()
   const [open, setOpen] = useState(false)
   const [hidden, setHidden] = useState(true)
-  const [text, setText] = useState(value.name)
+  const [text, setText] = useState(station.name)
 
   const onOpenDialog = (e) => {
     setOpen(true)
@@ -34,7 +36,7 @@ export const StationInput = ({ value, setValue }) => {
 
   // onClickだとonBlurより順序が遅い
   const onSelectText = (e) => {
-    setValue(stations3.find(station => station.id == e.target.dataset.id))
+    setStation(stations3.find(station => station.id == e.target.dataset.id))
     setText(e.target.dataset.name)
     setHidden(true)
     setOpen(false)
@@ -55,7 +57,7 @@ export const StationInput = ({ value, setValue }) => {
       width="300px"
       height="24px"
     >
-      {value.name}
+      {station.name}
     </Text>
     <Box
       hidden={!open}
@@ -112,7 +114,7 @@ export const StationInput = ({ value, setValue }) => {
             onMouseDown={onSelectText}
             data-id={id}
             data-name={name}
-            backgroundColor={name == value.name ? "bisque" : "inherit"}
+            backgroundColor={name == station.name ? "bisque" : "inherit"}
           >
             {name}
           </Box>
@@ -122,4 +124,21 @@ export const StationInput = ({ value, setValue }) => {
 
     </Box>
   </>)
+}
+
+export const RadiusInput = () => {
+  const [searchRadius, setSearchRadius] = useSearchRadius()
+  const onTextChange = (e) => {
+    setSearchRadius(e.target.value)
+  }
+  return (<Input
+    border={"1px solid lightgray"}
+    max="5000"
+    type="number"
+    backgroundColor="white"
+    width="300px"
+    height="24px"
+    value={searchRadius}
+    onChange={onTextChange}
+  />)
 }

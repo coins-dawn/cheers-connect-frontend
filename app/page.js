@@ -1,28 +1,33 @@
 'use client'
 
-import { StationInput } from '@/components/input'
+import { RadiusInput, StationInput } from '@/components/input'
 import { MyMap } from '@/components/map'
-import { Box, Text } from '@kuma-ui/core'
-import { useState } from 'react'
+import { usePage, useRequestParam, useSearchRadius, useStation } from '@/util/state'
+import { Box, Button, Text } from '@kuma-ui/core'
 
 export default function Home() {
-  const [station, setStation] = useState({
-    'coord': '35.606463,139.734868',
-    'kana': '',
-    'id': '',
-    'name': ''
-  })
+  const [station] = useStation()
+  const [searchRadius] = useSearchRadius()
+  const [param, setParam] = useRequestParam()
+  const [page, setPage] = usePage()
+  const onSearch = () => {
+    setParam({
+      stationId: station.id,
+      searchRadius: searchRadius
+    })
+    setPage('result')
+  }
 
   return (
     <Box>
       <Text>駅</Text>
-      <StationInput
-        value={station}
-        setValue={setStation}
-      />
-      <MyMap
-        station={station}
-      />
+      <StationInput />
+      <Text>半径</Text>
+      <RadiusInput />
+      <Button
+        onClick={onSearch}
+      >検索</Button>
+      <MyMap />
     </Box>
   )
 }
