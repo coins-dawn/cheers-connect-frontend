@@ -1,4 +1,4 @@
-import { stations3 } from "@/data/stations"
+import { stations } from "@/data/stations"
 import { isMatch } from "@/util/input"
 import { useSearchRadius, useStation } from "@/util/state"
 import { Box, Button, Flex, Input, Text } from "@kuma-ui/core"
@@ -36,7 +36,7 @@ export const StationInput = (props) => {
 
   // onClickだとonBlurより順序が遅い
   const onSelectText = (e) => {
-    setStation(stations3.find(station => station.id == e.target.dataset.id))
+    setStation(stations.find(station => station.id == e.target.dataset.id))
     setText(e.target.dataset.name)
     setHidden(true)
     setOpen(false)
@@ -98,7 +98,7 @@ export const StationInput = (props) => {
           // border="1px solid lightgray"
           hidden={hidden}
         >
-          {stations3.filter(({ kanji, kana, name }) => isMatch(kanji, kana, name, text)).map(({ id, name }) => (
+          {stations.filter(({ kanji, kana, name }) => isMatch(kanji, kana, name, text)).map(({ id, name }) => (
             <Box
               key={id}
               height="40px"
