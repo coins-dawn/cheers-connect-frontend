@@ -48,82 +48,89 @@ export const StationInput = (props) => {
     }
   }, [open])
 
-  return (<>
-    <Text
-      onClick={onOpenDialog}
-      cursor="pointer"
-      border={"1px solid lightgray"}
-      backgroundColor="white"
-      width="300px"
-      height="24px"
-    >
-      {station.name}
-    </Text>
+  return (
     <Box
-      hidden={!open}
-      backgroundColor="white"
-      border="1px solid gray"
-      width="300px"
-      height="300px"
+      position="relative"
     >
-      <Flex
+      <Text
+        onClick={onOpenDialog}
+        cursor="pointer"
+        border="1px solid lightgray"
+        backgroundColor="white"
+        width="300px"
+        height="24px"
       >
-        <Input
-          value={text}
-          onChange={onTextChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          ref={ref}
-          // width="216px"
-          height="30px"
-          borderRadius="initial"
-          flexGrow="1"
-
-        />
-        <Button
-          onClick={onClose}
-        >
-          閉じる
-        </Button>
-      </Flex>
+        {station.name}
+      </Text>
       <Box
-        height="264px"
-        overflow="scroll"
-        // border="1px solid lightgray"
-        hidden={hidden}
+        hidden={!open}
+        backgroundColor="white"
+        border="1px solid gray"
+        width="300px"
+        height="300px"
+        position="absolute"
+        top="0px"
+        left="0px"
       >
-        {stations3.filter(({ kanji, kana, name }) => isMatch(kanji, kana, name, text)).map(({ id, name }) => (
-          <Box
-            key={id}
-            height="40px"
-            lineHeight="40px"
-            _hover={{
-              backgroundColor: "antiquewhite",
-              cursor: "pointer"
-            }}
-            //   className={css`
-            //     @media (hover: hover) {
-            //       background-color: antiquewhite;
-            //       cursor: pointer;
-            //     }
-            //     @media (hover: none) {
-            //       background-color: inherit;
-            //       cursor: inherit;                    
-            //     }
-            //  `}
-            onMouseDown={onSelectText}
-            data-id={id}
-            data-name={name}
-            backgroundColor={name == station.name ? "bisque" : "inherit"}
+        <Flex
+        >
+          <Input
+            value={text}
+            onChange={onTextChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            ref={ref}
+            // width="216px"
+            height="30px"
+            borderRadius="initial"
+            flexGrow="1"
+
+          />
+          <Button
+            onClick={onClose}
           >
-            {name}
-          </Box>
-        ))}
+            閉じる
+          </Button>
+        </Flex>
+        <Box
+          height="270px"
+          overflow="scroll"
+          // border="1px solid lightgray"
+          hidden={hidden}
+        >
+          {stations3.filter(({ kanji, kana, name }) => isMatch(kanji, kana, name, text)).map(({ id, name }) => (
+            <Box
+              key={id}
+              height="40px"
+              lineHeight="40px"
+              _hover={{
+                backgroundColor: "antiquewhite",
+                cursor: "pointer"
+              }}
+              //   className={css`
+              //     @media (hover: hover) {
+              //       background-color: antiquewhite;
+              //       cursor: pointer;
+              //     }
+              //     @media (hover: none) {
+              //       background-color: inherit;
+              //       cursor: inherit;                    
+              //     }
+              //  `}
+              onMouseDown={onSelectText}
+              data-id={id}
+              data-name={name}
+              backgroundColor={name == station.name ? "bisque" : "inherit"}
+            >
+              {name}
+            </Box>
+          ))}
+
+        </Box>
 
       </Box>
-
     </Box>
-  </>)
+  )
 }
 
 export const RadiusInput = () => {
@@ -132,8 +139,9 @@ export const RadiusInput = () => {
     setSearchRadius(e.target.value)
   }
   return (<Input
-    border={"1px solid lightgray"}
+    border="1px solid lightgray"
     max="5000"
+    min="0"
     type="number"
     backgroundColor="white"
     width="300px"
