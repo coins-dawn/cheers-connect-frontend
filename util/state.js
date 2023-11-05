@@ -53,7 +53,7 @@ export const usePage = () => {
 }
 
 const initialParam = {
-  stationId: '',
+  stationId: null,
   searchRadius: 5000
 }
 
@@ -70,24 +70,4 @@ export const useRequestParam = () => {
   )
 
   return [param, setParam]
-}
-
-const fetcher = async (key, stationId, searchRadius) => {
-  const url = `${key}/?station_id=${stationId}&search_radius=${searchRadius}`
-  const res = await fetch(url)
-  return res.json()
-}
-
-export const useSearchStore = ({ stationId, searchRadius }) => {
-  const { mutate, data: stores, error, isLoading } = useSWR(
-    [`${process.env.NEXT_PUBLIC_API_SEARCH_STORE}`, stationId, searchRadius],
-    ([key, param1, param2]) => fetcher(key, param1, param2)
-  )
-
-  return {
-    mutate: mutate,
-    stores: stores,
-    error,
-    isLoading
-  }
 }

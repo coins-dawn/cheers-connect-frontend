@@ -18,16 +18,29 @@ export default function Home() {
     setPage('result')
   }
 
-  return (
-    <Box>
-      <Text>駅</Text>
+  return (<>
+    <Box
+      position="absolute"
+      top="8px"
+      left="8px"
+      zIndex="20"
+      backgroundColor="rgba(128, 128, 128, 0.8)"
+      padding="16px"
+      display="flex"
+      flexDirection="column"
+    >
+      <Text color="white">駅</Text>
       <StationInput />
-      <Text>半径</Text>
+      <Text color="white">半径</Text>
       <RadiusInput />
       <Button
+        width="300px"
+        height="24px"
+        border="1px solid lightgray"
+        marginTop="16px"
         onClick={onSearch}
       >検索</Button>
-      <MyMap />
     </Box>
-  )
+    <MyMap />
+  </>)
 }
